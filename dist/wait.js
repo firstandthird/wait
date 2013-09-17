@@ -1,3 +1,10 @@
+/*!
+ * wait - Javascript plugin to show an iOS style loading graphic.
+ * v0.1.0
+ * https://github.com/firstandthird/wait
+ * copyright First + Third 2013
+ * MIT License
+*/
 (function(window,undefined){
   /**
    * Shim for getElementsByClassName for IE8 and below

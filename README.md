@@ -2,6 +2,8 @@
 
 Javascript plugin to show an iOS style loading graphic.
 
+![](https://raw.github.com/firstandthird/wait/master/design/dark.png)
+
 ##Features
 
 - Doesn't allow user to click anything else while visible (configurable).

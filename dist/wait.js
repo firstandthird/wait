@@ -17,7 +17,7 @@
 
   var _wait = window.wait;
 
-  var wait = function(){};
+  function Wait(){}
 
   /**
    * Public method to show the loading overlay
@@ -28,7 +28,7 @@
    *        #preventClicks {Boolean} - Indicates wether or not we should prevent clicks behind the overlay
    *        #theme {String} - Theme of the plugin, should be dark, light or none.
    */
-  wait.prototype.show = function(options){
+  Wait.prototype.show = function(options){
     this._setOptions(options);
     this.element = this._fetchContainer();
 
@@ -45,7 +45,7 @@
   /**
    * Public method that will hide and destroy the overlay and the modal content and unbind events
    */
-  wait.prototype.hide = function(){
+  Wait.prototype.hide = function(){
     this._unbindEvents();
 
     if (this.preventClicks){
@@ -60,14 +60,14 @@
   /**
    * Restores previous value of global `wait` and returns a new instance of wait
    *
-   * @returns {wait}
+   * @returns {Wait}
    */
-  wait.prototype.noConflict = function(){
+  Wait.prototype.noConflict = function(){
     if (window.wait === wait){
       window.wait = _wait;
     }
 
-    return new wait();
+    return new Wait();
   };
   /**
    * Helper method to add a class to a DOM element
@@ -76,7 +76,7 @@
    * @param {String} cssClass
    * @private
    */
-  wait.prototype._addClass = function(element, cssClass){
+  Wait.prototype._addClass = function(element, cssClass){
     element.className = element.className + ' ' + cssClass;
   };
   /**
@@ -86,7 +86,7 @@
    * @param {String} cssClass
    * @private
    */
-  wait.prototype._removeClass = function(element, cssClass){
+  Wait.prototype._removeClass = function(element, cssClass){
     var cssClasses = element.className.split(' '),
         position = cssClasses.indexOf(cssClass);
     if (position !== -1){
@@ -100,7 +100,7 @@
    * @param {Object} options
    * @private
    */
-  wait.prototype._setOptions = function(options){
+  Wait.prototype._setOptions = function(options){
     options = options || {};
     this.title = options.title || 'Loading...';
     this.container = options.container || 'body';
@@ -112,7 +112,7 @@
    *
    * @private
    */
-  wait.prototype._bindEvents = function(){
+  Wait.prototype._bindEvents = function(){
     if (this.preventClicks){
       this.overlay.addEventListener('click', this._preventClick, false);
     }
@@ -123,7 +123,7 @@
    * @see _bindEvents
    * @private
    */
-  wait.prototype._unbindEvents = function(){
+  Wait.prototype._unbindEvents = function(){
     if (this.preventClicks){
       this.overlay.removeEventListener('click', this._preventClick, false);
     }
@@ -133,7 +133,7 @@
    *
    * @private
    */
-  wait.prototype._preventClick = function(){
+  Wait.prototype._preventClick = function(){
     return false;
   };
   /**
@@ -142,7 +142,7 @@
    * @returns {HTMLElement}
    * @private
    */
-  wait.prototype._fetchContainer = function(){
+  Wait.prototype._fetchContainer = function(){
     var method = this._determineFetchingFunction(this.container);
     var container = method === 'getElementsByTagName' ? this.container : this.container.substring(1);
     var result = window.document[method](container);
@@ -159,7 +159,7 @@
    * @template <div class="wait-overlay wait-{{ themeName }}"></div>
    * @private
    */
-  wait.prototype._createOverlay = function(){
+  Wait.prototype._createOverlay = function(){
     this.overlay = window.document.createElement('div');
     this.overlay.className = 'wait-overlay wait-' + this.theme;
     window.document.body.appendChild(this.overlay);
@@ -172,7 +172,7 @@
    * @see _createOverlay
    * @private
    */
-  wait.prototype._removeOverlay = function(){
+  Wait.prototype._removeOverlay = function(){
     window.document.body.removeChild(this.overlay);
   };
   /**
@@ -182,7 +182,7 @@
    * @see _createOverlay
    * @private
    */
-  wait.prototype._positionOverlay = function(){
+  Wait.prototype._positionOverlay = function(){
     var left = '0px',
         top = '0px',
         width = '100%',
@@ -210,7 +210,7 @@
    *
    * @private
    */
-  wait.prototype._createModal = function(){
+  Wait.prototype._createModal = function(){
     this.modal = window.document.createElement('div');
 
     this.modal.className = 'wait wait-' + this.theme;
@@ -229,7 +229,7 @@
    * @see _createModal
    * @private
    */
-  wait.prototype._positionModal = function(){
+  Wait.prototype._positionModal = function(){
     var left, top,
         position = 'fixed';
 
@@ -251,7 +251,7 @@
    * @see _createModal
    * @private
    */
-  wait.prototype._removeModal = function(){
+  Wait.prototype._removeModal = function(){
     window.document.body.removeChild(this.modal);
   };
   /**
@@ -261,7 +261,7 @@
    * @returns {String} with the function name
    * @private
    */
-  wait.prototype._determineFetchingFunction = function(selector){
+  Wait.prototype._determineFetchingFunction = function(selector){
     var method = '';
 
     switch(selector.charAt(0)){
@@ -279,5 +279,5 @@
     return method;
   };
 
-  window.wait = new wait();
+  window.wait = new Wait();
 })(window);

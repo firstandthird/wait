@@ -1,0 +1,22 @@
+{
+  "name": "wait",
+  "description": "Javascript plugin to show an iOS style loading graphic.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/firstandthird/wait",
+  "license": "MIT",
+  "copyright": "First + Third",
+  "main": "dist/wait.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "assert": "*"
+  },
+  "ignore": [
+    "test",
+    "example",
+    "lib",
+    "Gruntfile.js",
+    "package.json",
+    "design"
+  ]
+}

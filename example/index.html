@@ -44,6 +44,18 @@
   <script src="../dist/wait.js"></script>
     <script>
       wait.show();
+      var text = 'Removing in ';
+      var seconds = 5;
+      var intervalId = setInterval(function(){
+        if (seconds){
+          wait.setText(text + seconds);
+          seconds--;
+        }
+        else {
+          wait.hide();
+          clearInterval(intervalId);
+        }
+      },1000);
 
 //      setTimeout(function(){
 //        wait.hide();

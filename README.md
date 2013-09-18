@@ -53,6 +53,12 @@ No Conflict
 
 `var otherVar = wait.noConflict()`
 
+Set Text
+
+Will change the text while is being shown.
+
+`wait.setText('Disappearing on 5 seconds...')`
+
 ##Development
 
 ###Requirements

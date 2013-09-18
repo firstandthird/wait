@@ -57,6 +57,10 @@
 
     return this;
   };
+  Wait.prototype.setText = function(text){
+    this.paragraph.innerHTML = text;
+    return this;
+  };
   /**
    * Restores previous value of global `wait` and returns a new instance of wait
    *
@@ -214,10 +218,10 @@
     this.modal = window.document.createElement('div');
 
     this.modal.className = 'wait wait-' + this.theme;
-    var paragraph = window.document.createElement('p');
+    this.paragraph = window.document.createElement('p');
     var text = window.document.createTextNode(this.title);
-    paragraph.appendChild(text);
-    this.modal.appendChild(paragraph);
+    this.paragraph.appendChild(text);
+    this.modal.appendChild(this.paragraph);
     window.document.body.appendChild(this.modal);
 
     this._positionModal();

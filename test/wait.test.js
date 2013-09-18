@@ -29,6 +29,13 @@ suite('wait', function() {
       assert.ok($('.wait').attr('class').indexOf(wait.theme) !== -1);
     });
   });
+  suite('setText', function(){
+    test('text should change upon calling setText',function(){
+      var text = 'Changed text';
+      wait.setText(text);
+      assert.equal($('.wait').find('p').text(),text);
+    });
+  });
   suite('hide', function(){
     suiteSetup(function(){
       wait.hide();

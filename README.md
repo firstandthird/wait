@@ -40,6 +40,8 @@ wait.show({
 	container: 'body', //centers wait inside this container
 	preventClicks: true, //prevents users from clicking on anything inside the container,
 	theme: 'dark' //'light' and 'none' also supported
+	onShow : function() { ... } // Function fired upon shown
+	onHide : function() { ... } // Function fired upon hide
 });
 
 //stuff happens

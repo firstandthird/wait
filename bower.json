@@ -1,7 +1,7 @@
 {
   "name": "wait",
   "description": "Javascript plugin to show an iOS style loading graphic.",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "homepage": "https://github.com/firstandthird/wait",
   "license": "MIT",
   "copyright": "First + Third",

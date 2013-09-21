@@ -1,3 +1,9 @@
+0.3.0 / 2013-09-21
+==================
+
+  * Fixes #3 - Adding `onShow` & `onHide` callbacks
+  * Fixed potential bug on `_setOptions` that avoids that `preventClicks` option could be `false`
+
 0.2.0 / 2013-09-18
 ==================
 

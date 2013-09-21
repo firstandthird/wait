@@ -40,6 +40,10 @@
     this._createModal();
     this._bindEvents();
 
+    if (this.onShow){
+      this.onShow.apply(this);
+    }
+
     return this;
   };
   /**
@@ -54,6 +58,10 @@
 
     this._removeModal();
     this._removeOverlay();
+
+    if (this.onHide){
+      this.onHide.apply(this);
+    }
 
     return this;
   };
@@ -108,8 +116,17 @@
     options = options || {};
     this.title = options.title || 'Loading...';
     this.container = options.container || 'body';
-    this.preventClicks = options.preventClicks || true;
-    this.theme = options.theme || 'dark';
+
+    if (typeof options.preventClicks !== "undefined"){
+      this.preventClicks = options.preventClicks;
+    }
+    else if (typeof this.preventClicks === "undefined"){
+      this.preventClicks = true;
+    }
+
+    this.theme = options.theme || this.theme || 'dark';
+    this.onShow = options.onShow || this.onShow || null;
+    this.onHide = options.onHide || this.onHide || null;
   };
   /**
    * Function that bind to `click` on the overlay to prevent clicking through only if preventClicks option is set to true

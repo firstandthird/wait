@@ -11,7 +11,6 @@ suite('wait', function() {
   test('wait should be undefined in the window after no conflict has been called', function(){
     assert.equal(window.wait,undefined);
   });
-
   suite('show', function(){
     suiteSetup(function(){
       wait.show();
@@ -27,6 +26,14 @@ suite('wait', function() {
     });
     test('modal div should contain theme class', function(){
       assert.ok($('.wait').attr('class').indexOf(wait.theme) !== -1);
+    });
+    test('onShow function should be called upon shown', function(done){
+      wait.hide();
+      wait.show({
+        onShow : function(){
+          done();
+        }
+      });
     });
   });
   suite('setText', function(){
@@ -45,6 +52,14 @@ suite('wait', function() {
     });
     test('wait should remove the modal div', function(){
       assert.equal($('.wait').length,0);
+    });
+    test('onHide function should be called upon hide', function(done){
+      wait.show({
+        onHide : function(){
+          done();
+        }
+      });
+      wait.hide();
     });
   });
 });

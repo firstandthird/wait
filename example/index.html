@@ -43,7 +43,14 @@
 
   <script src="../dist/wait.js"></script>
     <script>
-      wait.show();
+      wait.show({
+        onShow : function(){
+          console.log('Showing');
+        },
+        onHide : function(){
+          console.log('Hiding');
+        }
+      });
       var text = 'Removing in ';
       var seconds = 5;
       var intervalId = setInterval(function(){
@@ -56,10 +63,6 @@
           clearInterval(intervalId);
         }
       },1000);
-
-//      setTimeout(function(){
-//        wait.hide();
-//      },2000);
     </script>
   </body>
 </html>

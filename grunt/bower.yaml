@@ -1,4 +1,2 @@
 main:
   dest: 'dist/_bower.js'
-  exclude:
-    - 'assert'

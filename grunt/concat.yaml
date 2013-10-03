@@ -3,7 +3,7 @@ options:
 dist:
   src:
     - 'lib/<%= name %>.js'
-  dest: 'dist/<%= name %>.js'
+  dest: 'dist/fidel.<%= name %>.js'
 full:
   src:
     - 'dist/_bower.js'

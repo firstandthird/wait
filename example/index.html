@@ -41,28 +41,43 @@
   }
 </code></pre>
 
-  <script src="../dist/wait.js"></script>
-    <script>
-      wait.show({
+  <script src="../bower_components/jquery/jquery.min.js"></script>
+  <script src="../bower_components/fidel/dist/fidel.min.js"></script>
+  <script src="../dist/fidel.wait.js"></script>
+  <script>
+    (function(){
+      var bodyWait = $('body').wait({
         onShow : function(){
-          console.log('Showing');
+          console.log('onShow callback');
         },
         onHide : function(){
-          console.log('Hiding');
+          console.log('onHide callback');
         }
       });
+      bodyWait.on('show',function(){
+        console.log('Showing wait');
+      });
+
+      bodyWait.on('hide',function(){
+        console.log('Hiding wait');
+      });
+
+
+      bodyWait.wait('show');
+
       var text = 'Removing in ';
       var seconds = 5;
       var intervalId = setInterval(function(){
         if (seconds){
-          wait.setText(text + seconds);
+          bodyWait.wait('setText',text + seconds);
           seconds--;
         }
         else {
-          wait.hide();
+          bodyWait.wait('hide');
           clearInterval(intervalId);
         }
       },1000);
-    </script>
+    })();
+  </script>
   </body>
 </html>

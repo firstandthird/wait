@@ -1,3 +1,10 @@
+0.4.0 / 2013-10-03
+==================
+
+  * Fidelizing wait
+  * Positioning on the center of the screen - Fixes #6
+  * Adding tests - Fixes #8
+
 0.3.0 / 2013-09-21
 ==================
 

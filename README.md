@@ -1,6 +1,6 @@
 #wait
 
-Javascript plugin to show an iOS style loading graphic.
+Fidel plugin to show an iOS style loading graphic.
 
 ![](https://raw.github.com/firstandthird/wait/master/design/dark.png)
 
@@ -25,41 +25,52 @@ Javascript plugin to show an iOS style loading graphic.
 ###Basic
 
 ```javascript
-wait.show();
+$('#element').wait('show');
 
 //stuff happens
 
-wait.hide();
+$('#element').wait('hide');
 ```
 
 ###With Options (defaults shown)
 
 ```javascript
-wait.show({
+$('#element').wait('show',{
 	title: 'Loading...',
 	container: 'body', //centers wait inside this container
 	preventClicks: true, //prevents users from clicking on anything inside the container,
 	theme: 'dark' //'light' and 'none' also supported
 	onShow : function() { ... } // Function fired upon shown
 	onHide : function() { ... } // Function fired upon hide
+	pprogressSupport : false // Gives support for pprogress
 });
 
 //stuff happens
 
-wait.hide();
+$('#element').wait('hide');
 ```
 
 ###Other Methods
 
-No Conflict
-
-`var otherVar = wait.noConflict()`
-
-Set Text
+#### Set Text
 
 Will change the text while is being shown.
 
-`wait.setText('Disappearing on 5 seconds...')`
+`$('#element').wait('setText', 'Disappearing on 5 seconds...')`
+
+### Pprogress support
+
+If the [pprogress](https://github.com/firstandthird/pprogress) plugin is in the page and you pass the option `pprogressSupport` as `true`, wait will take the plugin and create a basic template inside of the modal so you can do fancy timers for wait.
+
+The wait plugin offers a wrapper around pprogress so if you call
+
+```javascript
+$('#element').wait('pprogress','tick', 0.20);
+```
+
+Will call the method thick on the inner pprogress instance passing the value `0.20`. Please, see [pprogress](https://github.com/firstandthird/pprogress) docs in order to learn more about this plugin.
+
+While using pprogress, wait will show pprogress on modal show, and it will hide itself when pprogress completes.
 
 ##Development
 

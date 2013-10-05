@@ -1,4 +1,9 @@
-0.4.0 / 2013-10-03
+0.5.0 / 2013-10-05
+==================
+
+  * Adding support for pprogress
+  * Fixed bug on which wait wouldn't position in the center of one element when scrolled
+
 ==================
 
   * Fidelizing wait

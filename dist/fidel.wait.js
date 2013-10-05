@@ -1,6 +1,6 @@
 /*!
  * wait - Javascript plugin to show an iOS style loading graphic.
- * v0.3.0
+ * v0.4.0
  * https://github.com/firstandthird/wait
  * copyright First + Third 2013
  * MIT License
@@ -13,8 +13,10 @@
       theme : 'dark',
       onShow : $.noop,
       onHide : $.noop,
+      pprogressSupport : false,
       overlayTemplate : '<div class="wait-overlay"></div>',
-      modalTemplate : '<div class="wait"></div>'
+      modalTemplate : '<div class="wait"></div>',
+      pprogressTemplate : '<div class="wait-pprogress"></div>'
     },
     show : function (options){
       this.setOptions(options);
@@ -26,6 +28,8 @@
       this._createOverlay();
       this._createModal();
       this._bindEvents();
+
+      this.pprogress('start',true);
 
       this.onShow.call(this);
       this.emit('show');
@@ -51,12 +55,24 @@
         this.preventClicks = options.preventClicks;
       }
 
+      if (typeof options.pprogressSupport !== "undefined"){
+        this.pprogressSupport = options.pprogressSupport;
+      }
+
       this.theme = options.theme || this.theme;
       this.onShow = options.onShow || this.onShow;
       this.onHide = options.onHide || this.onHide;
     },
     setText : function(text) {
       this.paragraph.text(text);
+    },
+    pprogress : function(){
+      if (this.pprogressSupport){
+        var args = Array.prototype.slice.call(arguments);
+        if (args.length){
+          this.pprogressDiv.pprogress.apply(this.pprogressDiv,args);
+        }
+      }
     },
     _createOverlay : function(){
       this.overlay = $(this.overlayTemplate)
@@ -76,11 +92,11 @@
             position = 'fixed';
 
         if (this.el[0].nodeName.toLowerCase() !== 'body'){
-          var rect = this.el[0].getBoundingClientRect();
-          left = rect.left + 'px';
-          top = rect.top + 'px';
-          width = rect.width + 'px';
-          height = rect.height + 'px';
+          var offset = this.el.offset();
+          left = offset.left + 'px';
+          top = offset.top + 'px';
+          width = this.el.width() + 'px';
+          height = this.el.height() + 'px';
           position = 'absolute';
         }
 
@@ -95,6 +111,12 @@
     _createModal : function(){
       this.modal = $(this.modalTemplate).addClass('wait-' + this.theme).appendTo('body');
       this.paragraph = $('<p></p>').text(this.title).appendTo(this.modal);
+      if (this.pprogressSupport){
+        this.pprogressDiv = $(this.pprogressTemplate).appendTo(this.modal);
+        this.pprogressDiv.pprogress({
+          fillColor: '#FFF'
+        });
+      }
 
       this._positionModal();
     },
@@ -107,9 +129,9 @@
 
       if (this.el[0].nodeName.toLowerCase() !== 'body'){
         position = 'absolute';
-        var rect = this.el[0].getBoundingClientRect();
-        left = Math.round(((rect.width - this.modal[0].offsetWidth) / 2) + rect.left);
-        top = Math.round(((rect.height - this.modal[0].offsetHeight) / 2) + rect.top);
+        var offset = this.el.offset();
+        top = ((this.el.height() - this.modal.outerHeight())/2 + offset.top);
+        left = ((this.el.width() - this.modal.outerWidth())/2 + offset.left);
       }
       else {
         top = (($(window).height() - this.modal.outerHeight())/2 + $(document).scrollTop());
@@ -125,10 +147,16 @@
       if (this.preventClicks){
         this.overlay.on('click',this._preventClick);
       }
+      if (this.pprogressSupport){
+        this.pprogressDiv.on('complete', this.proxy(this.hide));
+      }
     },
     _unbindEvents : function(){
       if (this.preventClicks){
-        this.overlay.off('click',this._preventClick);
+        this.overlay.off();
+      }
+      if (this.pprogressSupport){
+        this.pprogressDiv.off();
       }
     },
     _preventClick : function(){

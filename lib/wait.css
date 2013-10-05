@@ -37,3 +37,7 @@
   -o-filter: blur(1px);
   filter: blur(1px);
 }
+
+.wait-pprogress {
+    background: url(http://lorempixel.com/100/100/technics/) no-repeat;
+}

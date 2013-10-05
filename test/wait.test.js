@@ -1,5 +1,5 @@
 suite('wait', function() {
-  var wait, waitFidel;
+  var wait, waitFidel, waitPprogress;
 
   suiteSetup(function(){
     wait = $('body').wait();
@@ -78,6 +78,23 @@ suite('wait', function() {
       wait.wait('show');
       wait.wait('hide');
       wait.off();
+    });
+  });
+  suite('pprogress', function(){
+    suiteSetup(function(){
+      waitPprogress = $('#fixture').wait({
+        pprogressSupport : true
+      });
+      waitPprogress.wait('show');
+    });
+    test('wait should create a div for pprogress to work', function(){
+      assert.equal($('.wait-pprogress').length,1);
+    });
+    test('wait should hide when pprogress completes', function(){
+      waitPprogress.wait('pprogress','done');
+      waitPprogress.data('wait').pprogressDiv.on('completed',function(){
+        assert.equal($('.wait-overlay').length,0);
+      });
     });
   });
 });

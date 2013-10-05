@@ -1,6 +1,6 @@
 /*!
  * wait - Javascript plugin to show an iOS style loading graphic.
- * v0.4.0
+ * v0.5.0
  * https://github.com/firstandthird/wait
  * copyright First + Third 2013
  * MIT License
@@ -25,6 +25,9 @@
         this.el.addClass('wait-blur');
       }
 
+      this.previousOverflow = this.el.css('overflow');
+      this.el.css('overflow','hidden');
+
       this._createOverlay();
       this._createModal();
       this._bindEvents();
@@ -40,6 +43,8 @@
       if (this.preventClicks){
         this.el.removeClass('wait-blur');
       }
+
+      this.el.css('overflow',this.previousOverflow);
 
       this._removeModal();
       this._removeOverlay();
@@ -125,10 +130,9 @@
     },
     _positionModal : function(){
       var left, top,
-          position = 'fixed';
+          position = 'absolute';
 
       if (this.el[0].nodeName.toLowerCase() !== 'body'){
-        position = 'absolute';
         var offset = this.el.offset();
         top = ((this.el.height() - this.modal.outerHeight())/2 + offset.top);
         left = ((this.el.width() - this.modal.outerWidth())/2 + offset.left);
@@ -138,10 +142,11 @@
         left = (($(window).width() - this.modal.outerWidth())/2 + $(document).scrollLeft());
       }
 
-
-      this.modal[0].style.left = left + 'px';
-      this.modal[0].style.top = top + 'px';
-      this.modal[0].style.position = position;
+      this.modal.css({
+        left : left,
+        top : top,
+        position : position
+      });
     },
     _bindEvents : function(){
       if (this.preventClicks){

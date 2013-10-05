@@ -27,6 +27,9 @@ suite('wait', function() {
     test('modal div should contain theme class', function(){
       assert.ok($('.wait').attr('class').indexOf(waitFidel.theme) !== -1);
     });
+    test('element should have overflow hidden to avoid scrolling', function(){
+      assert.equal(waitFidel.el.css('overflow'),'hidden');
+    });
     test('onShow function should be called upon shown', function(done){
       wait.wait('hide');
       wait.wait('show',{
@@ -61,6 +64,9 @@ suite('wait', function() {
     });
     test('wait should remove the modal div', function(){
       assert.equal($('.wait').length,0);
+    });
+    test('element should have overflow visible to restore scrolling', function(){
+      assert.equal(waitFidel.el.css('overflow'),'visible');
     });
     test('onHide function should be called upon hide', function(done){
       wait.wait('show',{

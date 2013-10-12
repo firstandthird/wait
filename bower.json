@@ -11,7 +11,8 @@
   },
   "devDependencies": {
     "assert": "*",
-    "pprogress": "~0.1.0"
+    "pprogress": "~0.1.0",
+    "blanket": "*"
   },
   "ignore": [
     "test",
@@ -19,6 +20,7 @@
     "lib",
     "Gruntfile.js",
     "package.json",
+    "grunt",
     "design"
   ]
 }

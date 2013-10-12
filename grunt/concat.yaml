@@ -8,4 +8,4 @@ full:
   src:
     - 'dist/_bower.js'
     - 'lib/<%= name %>.js'
-  dest: 'dist/<%= name %>.full.js'
+  dest: 'dist/<%= name %>.js'

@@ -14,6 +14,7 @@
       onShow : $.noop,
       onHide : $.noop,
       pprogressSupport : false,
+      pprogressFill : '#000',
       overlayTemplate : '<div class="wait-overlay"></div>',
       modalTemplate : '<div class="wait"></div>',
       pprogressTemplate : '<div class="wait-pprogress"></div>'
@@ -119,7 +120,7 @@
       if (this.pprogressSupport){
         this.pprogressDiv = $(this.pprogressTemplate).appendTo(this.modal);
         this.pprogressDiv.pprogress({
-          fillColor: '#FFF'
+          fillColor: this.pprogressFill
         });
       }
 
